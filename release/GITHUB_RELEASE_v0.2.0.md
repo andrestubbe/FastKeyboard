@@ -46,7 +46,7 @@
 ---
 
 ## 🔧 Technical Details
-- **Native DLL:** `fastkeyboard.dll` (v0.2.0, bundled inside JAR).
+- **Native DLL:** `fastkeyboard.dll` (v0.2.0, bundled inside `FastKeyboard-0.2.0.jar`).
 - **Backend:** Win32 RawInput API (`WM_INPUT`).
 - **Optimization:** Zero-allocation event dispatching loop.
 
