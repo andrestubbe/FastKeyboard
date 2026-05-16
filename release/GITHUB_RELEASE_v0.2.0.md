@@ -26,21 +26,40 @@
 
 ### Maven
 ```xml
+<repositories>
+    <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+    </repository>
+</repositories>
+
 <dependencies>
-    <!-- 1. The FastKeyboard Module -->
+    <!-- FastKeyboard Module -->
     <dependency>
         <groupId>com.github.andrestubbe</groupId>
         <artifactId>FastKeyboard</artifactId>
         <version>0.2.0</version>
     </dependency>
 
-    <!-- 2. FastCore (Required Native Loader) -->
+    <!-- FastCore (Required Native Loader) -->
     <dependency>
         <groupId>com.github.andrestubbe</groupId>
         <artifactId>fastcore</artifactId>
         <version>v1.0.0</version>
     </dependency>
 </dependencies>
+```
+
+### Gradle
+```groovy
+repositories {
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    implementation 'com.github.andrestubbe:FastKeyboard:0.2.0'
+    implementation 'com.github.andrestubbe:fastcore:v1.0.0'
+}
 ```
 
 ---

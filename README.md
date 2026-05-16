@@ -88,8 +88,11 @@ FastKeyboard requires **two** dependencies: the module itself and `FastCore` (th
 ```
 
 ### Direct Download
-If you don't use a build tool, you can download the standalone JAR (including the native DLL) directly from the releases:
+If you don't use a build tool, you can download the standalone JAR (which bundles the native DLL and the **FastCore** loader) directly from the releases:
 - [**Download FastKeyboard-0.2.0.jar**](https://github.com/andrestubbe/FastKeyboard/releases/download/v0.2.0/FastKeyboard-0.2.0.jar)
+
+> [!NOTE]
+> This JAR is self-contained and includes all necessary native components for Windows.
 
 ---
 
