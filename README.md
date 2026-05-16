@@ -75,7 +75,7 @@ FastKeyboard requires **two** dependencies: the module itself and `FastCore` (th
     <dependency>
         <groupId>com.github.andrestubbe</groupId>
         <artifactId>FastKeyboard</artifactId>
-        <version>0.1.0</version>
+        <version>0.2.0</version>
     </dependency>
     
     <!-- 2. FastCore (Required for native loading) -->
@@ -85,6 +85,18 @@ FastKeyboard requires **two** dependencies: the module itself and `FastCore` (th
         <version>v1.0.0</version>
     </dependency>
 </dependencies>
+```
+
+### Gradle (JitPack)
+```groovy
+repositories {
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    implementation 'com.github.andrestubbe:FastKeyboard:0.2.0'
+    implementation 'com.github.andrestubbe:fastcore:v1.0.0'
+}
 ```
 
 ### Direct Download
