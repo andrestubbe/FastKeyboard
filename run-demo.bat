@@ -1,3 +1,3 @@
 @echo off
 echo Running FastKeyboard Demo...
-mvn exec:java -f examples/Demo/pom.xml
+mvn compile exec:java -f examples/Demo/pom.xml
