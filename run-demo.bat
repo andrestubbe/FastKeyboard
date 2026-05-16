@@ -1,3 +1,3 @@
 @echo off
 echo Running FastKeyboard Demo...
-mvn exec:java -Dexec.mainClass="fastkeyboard.Demo" -f examples/Demo/pom.xml
+mvn exec:java -f examples/Demo/pom.xml
