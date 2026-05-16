@@ -18,8 +18,6 @@
             <groupId>com.github.andrestubbe</groupId>
             <artifactId>FastKeyboard</artifactId>
             <version>0.1.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/../../target/FastKeyboard-0.1.0.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.github.andrestubbe</groupId>
