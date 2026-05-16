@@ -1,5 +1,5 @@
 @echo off
 echo Building and Installing FastKeyboard...
-call mvn install -DskipTests
+call mvn install -DskipTests -q
 echo Running FastKeyboard Demo...
-call mvn compile exec:java -f examples/Demo/pom.xml
+call mvn compile exec:java -f examples/Demo/pom.xml -q
