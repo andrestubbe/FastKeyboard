@@ -8,7 +8,7 @@ import java.util.List;
 public class Demo {
     public static void main(String[] args) {
         System.out.println("===========================================");
-        System.out.println("   ⚡ FastKeyboard Native Demo (v0.1.0) ⚡");
+        System.out.println("   ⚡ FastKeyboard Native Demo (v0.2.0) ⚡");
         System.out.println("===========================================");
 
         FastKeyboard keyboard = new FastKeyboardImpl();
