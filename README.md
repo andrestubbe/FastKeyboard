@@ -10,9 +10,29 @@
 
 ---
 
-**FastKeyboard** provides system-wide keyboard access by tapping directly into the Windows `RawInput` API. It bypasses the standard OS message queue translation, giving you raw hardware scancodes and the ability to distinguish between different physical keyboards.
+## Why Raw Input?
 
-Whether you are building telemetry for AI agents, high-performance macro tools, or complex hardware instrumentation, FastKeyboard ensures you get the data at the speed of the kernel.
+Standard Java APIs (AWT `KeyListener` or `WM_KEYDOWN`) are often too slow or limited for advanced telemetry. FastKeyboard solves this by intercepting events at the hardware level:
+- **Hardware Scancodes**: Get the physical "Make Code" regardless of the OS keyboard layout (QWERTZ/QWERTY).
+- **Multi-Keyboard Logic**: Distinguish between multiple physical devices (e.g., separate a barcode scanner from a main keyboard).
+- **Anti-Ghosting**: Direct real-time capture of the hardware stream.
+
+---
+
+## Agent Integration (Agent-Kit)
+
+FastKeyboard is a core component for building **Context-Aware AI Agents**. It allows agents to monitor user behavior, detect typing rhythms, and react to specific hardware triggers.
+
+### JSON Telemetry Example
+```json
+{
+  "action": "start_keyboard_telemetry",
+  "filters": {
+    "device_handle": "0x0001004F",
+    "include_scancodes": true
+  }
+}
+```
 
 ---
 

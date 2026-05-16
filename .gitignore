@@ -2,6 +2,7 @@ target/
 .vscode/
 bin/
 *.dll
+!src/main/resources/native/*.dll
 *.exe
 *.o
 *.obj
