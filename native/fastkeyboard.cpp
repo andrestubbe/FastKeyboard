@@ -42,15 +42,35 @@ LRESULT CALLBACK RawInputWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPar
             
             bool isPressed = (rkb.Flags & RI_KEY_BREAK) == 0;
             bool isE0 = (rkb.Flags & RI_KEY_E0) != 0;
+            long timestamp = GetMessageTime();
+
+            // --- Character Translation ---
+            std::wstring keyCharStr;
+            if (isPressed) {
+                BYTE keyboardState[256];
+                GetKeyboardState(keyboardState);
+
+                wchar_t buffer[16] = {0};
+                int result = ToUnicode(rkb.VKey, rkb.MakeCode, keyboardState, buffer, 16, 0);
+                if (result > 0) {
+                    keyCharStr = std::wstring(buffer, result);
+                }
+            }
             
             JNIEnv* env;
             if (g_jvm->AttachCurrentThread((void**)&env, NULL) == JNI_OK) {
+                jstring jKeyChar = keyCharStr.empty() ? NULL : env->NewString((jchar*)keyCharStr.c_str(), (jsize)keyCharStr.length());
+                
                 env->CallVoidMethod(g_javaObject, g_dispatchMethod, 
                     (jlong)raw->header.hDevice, 
                     (jint)rkb.VKey, 
                     (jint)rkb.MakeCode, 
                     (jboolean)isPressed, 
-                    (jboolean)isE0);
+                    (jboolean)isE0,
+                    (jlong)timestamp,
+                    jKeyChar);
+
+                if (jKeyChar) env->DeleteLocalRef(jKeyChar);
             }
         }
     }
@@ -88,7 +108,7 @@ JNIEXPORT jlong JNICALL Java_fastkeyboard_FastKeyboardImpl_nStart(JNIEnv* env, j
     env->GetJavaVM(&g_jvm);
     g_javaObject = env->NewGlobalRef(obj);
     jclass clazz = env->GetObjectClass(obj);
-    g_dispatchMethod = env->GetMethodID(clazz, "dispatchKeyEvent", "(JIIZZ)V");
+    g_dispatchMethod = env->GetMethodID(clazz, "dispatchKeyEvent", "(JIIZZJLjava/lang/String;)V");
 
     KeyboardThreadContext* ctx = new KeyboardThreadContext();
     ctx->running = true;

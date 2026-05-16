@@ -25,14 +25,14 @@ public class Demo {
         System.out.println(">>> TRY PRESSING KEYS WHILE THIS WINDOW IS MINIMIZED! <<<");
         System.out.println(">>> PRESS 'ESC' TO STOP THE DEMO <<<\n");
 
-        keyboard.startListening((deviceHandle, vKey, makeCode, isPressed, isE0) -> {
+        keyboard.startListening((deviceHandle, vKey, makeCode, isPressed, isE0, timestamp, keyChar) -> {
             String state = isPressed ? "DOWN" : "UP  ";
-            String extended = isE0 ? "[E0]" : "    ";
+            String charDisplay = (keyChar != null && !keyChar.isEmpty()) ? "['" + keyChar + "']" : "    ";
             
-            System.out.printf("[%s] Handle:%d | VKey:0x%02X | ScanCode:0x%02X | %s\n", 
-                state, deviceHandle, vKey, makeCode, extended);
+            System.out.printf("[%d] [%s] Handle:%d | VKey:0x%02X | ScanCode:0x%02X | %s\n", 
+                timestamp, state, deviceHandle, vKey, makeCode, charDisplay);
 
-            // Exit on Escape key
+            // Exit on Escape key (VKey 0x1B)
             if (vKey == 0x1B && !isPressed) {
                 System.out.println("\n[ENGINE] ESC detected. Stopping...");
                 keyboard.stopListening();

@@ -5,13 +5,15 @@ package fastkeyboard;
  */
 public interface FastKeyboardListener {
     /**
-     * Called when a keyboard event is captured.
+     * Called when a keyboard event occurs.
      * 
-     * @param deviceHandle The native handle of the keyboard device.
-     * @param vKey The Windows Virtual Key code.
-     * @param makeCode The hardware scancode (Make Code).
-     * @param isPressed True if the key was pressed, false if released.
-     * @param isE0 True if the E0 extended bit is set (e.g., for right-side modifiers).
+     * @param deviceHandle The native handle of the physical keyboard.
+     * @param vKey The virtual key code (OS level).
+     * @param makeCode The hardware scan code.
+     * @param isPressed True if key is down, false if up.
+     * @param isE0 True if extended key (e.g. right Alt).
+     * @param timestamp System message timestamp in milliseconds.
+     * @param keyChar The translated character (e.g. 'a', '@'). Can be null/empty for non-text keys.
      */
-    void onKeyEvent(long deviceHandle, int vKey, int makeCode, boolean isPressed, boolean isE0);
+    void onKeyEvent(long deviceHandle, int vKey, int makeCode, boolean isPressed, boolean isE0, long timestamp, String keyChar);
 }

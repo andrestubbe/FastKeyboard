@@ -51,9 +51,9 @@ public class FastKeyboardImpl implements FastKeyboard {
     /**
      * Called by C++ JNI layer when a key event occurs.
      */
-    private void dispatchKeyEvent(long deviceHandle, int vKey, int makeCode, boolean isPressed, boolean isE0) {
+    private void dispatchKeyEvent(long deviceHandle, int vKey, int makeCode, boolean isPressed, boolean isE0, long timestamp, String keyChar) {
         if (currentListener != null) {
-            currentListener.onKeyEvent(deviceHandle, vKey, makeCode, isPressed, isE0);
+            currentListener.onKeyEvent(deviceHandle, vKey, makeCode, isPressed, isE0, timestamp, keyChar);
         }
     }
 
