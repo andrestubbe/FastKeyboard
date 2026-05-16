@@ -19,23 +19,6 @@ Standard Java APIs (AWT `KeyListener` or `WM_KEYDOWN`) are often too slow or lim
 
 ---
 
-## Agent Integration (Agent-Kit)
-
-FastKeyboard is a core component for building **Context-Aware AI Agents**. It allows agents to monitor user behavior, detect typing rhythms, and react to specific hardware triggers.
-
-### JSON Telemetry Example
-```json
-{
-  "action": "start_keyboard_telemetry",
-  "filters": {
-    "device_handle": "0x0001004F",
-    "include_scancodes": true
-  }
-}
-```
-
----
-
 ## Table of Contents
 - [Key Features](#key-features)
 - [Performance](#performance)
