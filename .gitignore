@@ -1,0 +1,14 @@
+target/
+.vscode/
+bin/
+*.dll
+*.exe
+*.o
+*.obj
+*.exp
+*.lib
+*.pdb
+*.suo
+*.user
+*.userosscache
+*.sln.doccache
