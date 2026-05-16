@@ -1,4 +1,4 @@
-# FastKeyboard — Native Windows RawInput API for Java
+# FastKeyboard — Native Windows RawInput API for Java [v0.2.0]
 
 **High-performance, background-capable raw keyboard interception for Java.**
 
