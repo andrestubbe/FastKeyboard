@@ -101,12 +101,14 @@ dependencies {
 }
 ```
 
-### Direct Download
-If you don't use a build tool, you can download the standalone JAR (which bundles the native DLL and the **FastCore** loader) directly from the releases:
-- [**Download FastKeyboard-0.2.0.jar**](https://github.com/andrestubbe/FastKeyboard/releases/download/v0.2.0/FastKeyboard-0.2.0.jar)
+### Option 3: Direct Download (No Build Tool)
+Download the latest JARs directly to add them to your classpath:
 
-> [!NOTE]
-> This JAR is self-contained and includes all necessary native components for Windows.
+1. 📦 [**fastkeyboard-v0.2.0.jar**](https://github.com/andrestubbe/FastKeyboard/releases/download/v0.2.0/FastKeyboard-0.2.0.jar) (The Core Library)
+2. ⚙️ [**fastcore-v1.0.0.jar**](https://github.com/andrestubbe/FastCore/releases/download/v1.0.0/fastcore-v1.0.0.jar) (The Mandatory Native Loader)
+
+> [!IMPORTANT]
+> Both JARs must be in your classpath for the native JNI calls to function correctly.
 
 ---
 
