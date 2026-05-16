@@ -2,7 +2,7 @@
 
 **High-performance, background-capable raw keyboard interception for Java.**
 
-[![FastKeyboard Showcase](docs/screenshot.png)](https://www.youtube.com/watch?v=00bgKmWOEk8)
+[![FastKeyboard Showcase](docs/screenshot.png)](https://www.youtube.com/watch?v=BZsqQl7WqWk)
 
 [![Build](https://img.shields.io/github/actions/workflow/status/andrestubbe/FastKeyboard/maven.yml?branch=main)](https://github.com/andrestubbe/FastKeyboard/actions)
 [![Java](https://img.shields.io/badge/Java-17+-blue.svg)](https://www.java.com)
