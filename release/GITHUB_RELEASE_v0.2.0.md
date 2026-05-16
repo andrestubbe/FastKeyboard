@@ -45,7 +45,7 @@
     <dependency>
         <groupId>com.github.andrestubbe</groupId>
         <artifactId>fastcore</artifactId>
-        <version>v1.0.0</version>
+        <version>0.1.0</version>
     </dependency>
 </dependencies>
 ```
@@ -58,7 +58,7 @@ repositories {
 
 dependencies {
     implementation 'com.github.andrestubbe:FastKeyboard:0.2.0'
-    implementation 'com.github.andrestubbe:fastcore:v1.0.0'
+    implementation 'com.github.andrestubbe:fastcore:0.1.0'
 }
 ```
 
