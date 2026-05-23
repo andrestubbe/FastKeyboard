@@ -61,10 +61,10 @@ FastKeyboard is designed for scenarios where every microsecond counts (e.g., beh
 
 ## Installation
 
-FastKeyboard requires **two** dependencies: the module itself and `FastCore` (the native library loader).
+### Option 1: Maven (Recommended)
+Add the JitPack repository and the dependencies to your `pom.xml`:
 
-### Maven (JitPack)
-```xml
+`xml
 <repositories>
     <repository>
         <id>jitpack.io</id>
@@ -73,44 +73,42 @@ FastKeyboard requires **two** dependencies: the module itself and `FastCore` (th
 </repositories>
 
 <dependencies>
-    <!-- 1. The FastKeyboard Module -->
+    <!-- FastKeyboard Library -->
     <dependency>
         <groupId>com.github.andrestubbe</groupId>
-        <artifactId>FastKeyboard</artifactId>
-        <version>0.1.0</version>
+        <artifactId>fastkeyboard</artifactId>
+        <version>v0.1.0</version>
     </dependency>
-    
-    <!-- 2. FastCore (Required for native loading) -->
+    <!-- FastCore (Required Native Loader) -->
     <dependency>
         <groupId>com.github.andrestubbe</groupId>
         <artifactId>fastcore</artifactId>
-        <version>0.1.0</version>
+        <version>v0.1.0</version>
     </dependency>
 </dependencies>
-```
+`
 
-### Gradle (JitPack)
-```groovy
+### Option 2: Gradle (via JitPack)
+`groovy
 repositories {
     maven { url 'https://jitpack.io' }
 }
 
 dependencies {
-    implementation 'com.github.andrestubbe:FastKeyboard:0.1.0'
-    implementation 'com.github.andrestubbe:fastcore:0.1.0'
+    implementation 'com.github.andrestubbe:.1.0'
+    implementation 'com.github.andrestubbe:fastcore:v0.1.0'
 }
-```
+`
 
 ### Option 3: Direct Download (No Build Tool)
 Download the latest JARs directly to add them to your classpath:
 
-1. 📦 [**fastkeyboard-v0.1.0.jar**](https://github.com/andrestubbe/FastKeyboard/releases/download/v0.1.0/FastKeyboard-0.1.0.jar) (The Core Library)
-2. ⚙️ [**fastcore-v0.1.0.jar**](https://github.com/andrestubbe/fastcore/releases/download/v0.1.0/fastcore-0.1.0.jar) (The Mandatory Native Loader)
+1. 📦 **[fastkeyboard-v0.1.0.jar](https://github.com/andrestubbe/FastKeyboard/releases/download/v0.1.0/fastkeyboard-v0.1.0.jar)** (The Core Library)
+2. ⚙️ **[fastcore-v0.1.0.jar](https://github.com/andrestubbe/FastCore/releases/download/v0.1.0/fastcore-v0.1.0.jar)** (The Mandatory Native Loader)
 
 > [!IMPORTANT]
-> Both JARs must be in your classpath for the native JNI calls to function correctly.
+> All JARs must be in your classpath for the native JNI calls to function correctly.
 
----
 
 ## Quick Start
 
