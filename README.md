@@ -1,4 +1,4 @@
-# FastKeyboard — Native Windows RawInput API for Java [v0.2.0]
+# FastKeyboard — Native Windows RawInput API for Java [v0.1.0]
 
 **High-performance, background-capable raw keyboard interception for Java.**
 
@@ -77,7 +77,7 @@ FastKeyboard requires **two** dependencies: the module itself and `FastCore` (th
     <dependency>
         <groupId>com.github.andrestubbe</groupId>
         <artifactId>FastKeyboard</artifactId>
-        <version>0.2.0</version>
+        <version>0.1.0</version>
     </dependency>
     
     <!-- 2. FastCore (Required for native loading) -->
@@ -96,7 +96,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.andrestubbe:FastKeyboard:0.2.0'
+    implementation 'com.github.andrestubbe:FastKeyboard:0.1.0'
     implementation 'com.github.andrestubbe:fastcore:0.1.0'
 }
 ```
@@ -104,7 +104,7 @@ dependencies {
 ### Option 3: Direct Download (No Build Tool)
 Download the latest JARs directly to add them to your classpath:
 
-1. 📦 [**fastkeyboard-v0.2.0.jar**](https://github.com/andrestubbe/FastKeyboard/releases/download/v0.2.0/FastKeyboard-0.2.0.jar) (The Core Library)
+1. 📦 [**fastkeyboard-v0.1.0.jar**](https://github.com/andrestubbe/FastKeyboard/releases/download/v0.1.0/FastKeyboard-0.1.0.jar) (The Core Library)
 2. ⚙️ [**fastcore-v0.1.0.jar**](https://github.com/andrestubbe/fastcore/releases/download/v0.1.0/fastcore-0.1.0.jar) (The Mandatory Native Loader)
 
 > [!IMPORTANT]
@@ -176,4 +176,6 @@ MIT License — See [LICENSE](LICENSE) file for details.
 <!-- 
 SEO Keywords: java, jni, native, fastjava, windows api, rawinput, keyboard hook, low latency, keylogger, telemetrie 
 -->
+
+
 
