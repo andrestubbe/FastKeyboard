@@ -1,4 +1,4 @@
-﻿# FastKeyboard â€” Native Windows RawInput API for Java [v0.1.0]
+﻿# FastKeyboard — Native Windows RawInput API for Java [v0.1.0]
 
 **High-performance, background-capable raw keyboard interception for Java.**
 
@@ -37,12 +37,12 @@ Standard Java APIs (AWT `KeyListener` or `WM_KEYDOWN`) are often too slow or lim
 
 ## Key Features
 
-- **ðŸš€ Native Performance** â€” Direct Win32 RawInput access via JNI.
-- **âš¡ Zero Overhead** â€” No polling, purely event-driven callbacks.
-- **ðŸ›¡ï¸ Hardware Scancodes** â€” Get immutable "Make Codes" instead of layout-dependent virtual keys.
-- **ðŸ“¦ Multi-Device Support** â€” Identify which physical keyboard sent the input (HID handle tracking).
-- **ðŸ“¦ Background Capture** â€” Intercept keys even when your Java app is minimized or hidden.
-- **ðŸ’Ž Zero GC Pressure** â€” High-performance event dispatching with minimal memory allocation.
+- **🚀 Native Performance** — Direct Win32 RawInput access via JNI.
+- **⚡ Zero Overhead** — No polling, purely event-driven callbacks.
+- **🛡️ Hardware Scancodes** — Get immutable "Make Codes" instead of layout-dependent virtual keys.
+- **📦 Multi-Device Support** — Identify which physical keyboard sent the input (HID handle tracking).
+- **📦 Background Capture** — Intercept keys even when your Java app is minimized or hidden.
+- **💎 Zero GC Pressure** — High-performance event dispatching with minimal memory allocation.
 
 ---
 
@@ -147,9 +147,9 @@ keyboard.startListening((handle, vKey, scanCode, pressed, isExtended) -> {
 
 | Platform | Status |
 |----------|--------|
-| Windows 10/11 (x64) | âœ… Fully Supported |
-| Linux | ðŸš§ Planned |
-| macOS | ðŸš§ Planned |
+| Windows 10/11 (x64) | ✅ Fully Supported |
+| Linux | 🚧 Planned |
+| macOS | 🚧 Planned |
 
 ---
 
@@ -160,17 +160,17 @@ For detailed instructions on compiling the C++ JNI code and building the project
 ---
 
 ## License
-MIT License â€” See [LICENSE](LICENSE) file for details.
+MIT License — See [LICENSE](LICENSE) file for details.
 
 ---
 
 ## Related Projects
-- [FastCore](https://github.com/andrestubbe/FastCore) â€” Native Library Loader for Java
-- [FastMouse](https://github.com/andrestubbe/FastMouse) â€” High-performance RawInput mouse engine
-- [FastUIA](https://github.com/andrestubbe/FastUIA) â€” Native Windows UI Automation
+- [FastCore](https://github.com/andrestubbe/FastCore) — Native Library Loader for Java
+- [FastMouse](https://github.com/andrestubbe/FastMouse) — High-performance RawInput mouse engine
+- [FastUIA](https://github.com/andrestubbe/FastUIA) — Native Windows UI Automation
 
 ---
-**Made with âš¡ by Andre Stubbe**
+**Made with ⚡ by Andre Stubbe**
 
 <!-- 
 SEO Keywords: java, jni, native, fastjava, windows api, rawinput, keyboard hook, low latency, keylogger, telemetrie 
