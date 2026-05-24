@@ -2,13 +2,13 @@
 
 **High-performance, background-capable raw keyboard interception for Java.**
 
-[![FastKeyboard Showcase](docs/screenshot.png)](https://www.youtube.com/watch?v=BZsqQl7WqWk)
-
 [![Status](https://img.shields.io/badge/status-v0.1.0-brightgreen.svg)](https://github.com/andrestubbe/FastKeyboard/releases/tag/v0.1.0)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Java](https://img.shields.io/badge/Java-17+-blue.svg)](https://www.java.com)
 [![Platform](https://img.shields.io/badge/Platform-Windows%2010+-lightgrey.svg)]()
 [![JitPack](https://img.shields.io/badge/JitPack-ready-green.svg)](https://jitpack.io/#andrestubbe)
+
+[![FastKeyboard Showcase](docs/screenshot.png)](https://www.youtube.com/watch?v=BZsqQl7WqWk)
 
 ---
 
@@ -166,11 +166,13 @@ MIT License — See [LICENSE](LICENSE) file for details.
 
 ## Related Projects
 - [FastCore](https://github.com/andrestubbe/FastCore) — Native Library Loader for Java
-- [FastMouse](https://github.com/andrestubbe/FastMouse) — High-performance RawInput mouse engine
-- [FastUIA](https://github.com/andrestubbe/FastUIA) — Native Windows UI Automation
+- [FastKeyboard](https://github.com/andrestubbe/FastKeyboard) — High-performance RawInput engine
+- [FastTheme](https://github.com/andrestubbe/FastTheme) — Advanced UI styling engine
 
 ---
-**Made with ⚡ by Andre Stubbe**
+**Part of the FastJava Ecosystem** — *Making the JVM faster.*
+
+
 
 <!-- 
 SEO Keywords: java, jni, native, fastjava, windows api, rawinput, keyboard hook, low latency, keylogger, telemetrie 
