@@ -12,15 +12,6 @@
 
 ---
 
-## Why Raw Input?
-
-Standard Java APIs (AWT `KeyListener` or `WM_KEYDOWN`) are often too slow or limited for advanced telemetry. FastKeyboard solves this by intercepting events at the hardware level:
-- **Hardware Scancodes**: Get the physical "Make Code" regardless of the OS keyboard layout (QWERTZ/QWERTY).
-- **Multi-Keyboard Logic**: Distinguish between multiple physical devices (e.g., separate a barcode scanner from a main keyboard).
-- **Anti-Ghosting**: Direct real-time capture of the hardware stream.
-
----
-
 ## Table of Contents
 - [Key Features](#key-features)
 - [Performance](#performance)
@@ -34,6 +25,15 @@ Standard Java APIs (AWT `KeyListener` or `WM_KEYDOWN`) are often too slow or lim
 - [Related Projects](#related-projects)
 
 ---
+## Why Raw Input?
+
+Standard Java APIs (AWT `KeyListener` or `WM_KEYDOWN`) are often too slow or limited for advanced telemetry. FastKeyboard solves this by intercepting events at the hardware level:
+- **Hardware Scancodes**: Get the physical "Make Code" regardless of the OS keyboard layout (QWERTZ/QWERTY).
+- **Multi-Keyboard Logic**: Distinguish between multiple physical devices (e.g., separate a barcode scanner from a main keyboard).
+- **Anti-Ghosting**: Direct real-time capture of the hardware stream.
+
+---
+
 
 ## Key Features
 
