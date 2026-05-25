@@ -24,6 +24,20 @@
 - [License](#license)
 - [Related Projects](#related-projects)
 
+
+---
+
+## Quick Start
+
+```java
+FastKeyboard keyboard = FastKeyboard.open();
+
+keyboard.startListening((handle, vKey, scanCode, pressed, isExtended) -> {
+    System.out.printf("Key %s: ScanCode 0x%X on Device %d\n", 
+        pressed ? "DOWN" : "UP", scanCode, handle);
+});
+```
+
 ---
 ## Why Raw Input?
 
@@ -71,16 +85,12 @@ Add the JitPack repository and the dependencies to your `pom.xml`:
         <url>https://jitpack.io</url>
     </repository>
 </repositories>
-
 <dependencies>
-    <!-- FastKeyboard Library -->
     <dependency>
         <groupId>com.github.andrestubbe</groupId>
         <artifactId>fastkeyboard</artifactId>
         <version>v0.1.0</version>
     </dependency>
-
-    <!-- FastCore (Required Native Loader) -->
     <dependency>
         <groupId>com.github.andrestubbe</groupId>
         <artifactId>fastcore</artifactId>
@@ -94,7 +104,6 @@ Add the JitPack repository and the dependencies to your `pom.xml`:
 repositories {
     maven { url 'https://jitpack.io' }
 }
-
 dependencies {
     implementation 'com.github.andrestubbe:fastkeyboard:v0.1.0'
     implementation 'com.github.andrestubbe:fastcore:v0.1.0'
@@ -106,29 +115,6 @@ Download the latest JARs directly to add them to your classpath:
 
 1. 📦 **[fastkeyboard-v0.1.0.jar](https://github.com/andrestubbe/FastKeyboard/releases/download/v0.1.0/fastkeyboard-v0.1.0.jar)** (The Core Library)
 2. ⚙️ **[fastcore-v0.1.0.jar](https://github.com/andrestubbe/FastCore/releases/download/v0.1.0/fastcore-v0.1.0.jar)** (The Mandatory Native Loader)
-
-> [!IMPORTANT]
-> All JARs must be in your classpath for the native JNI calls to function correctly.
-
-
-## Quick Start
-
-```java
-FastKeyboard keyboard = FastKeyboard.open();
-
-keyboard.startListening((handle, vKey, scanCode, pressed, isExtended) -> {
-    System.out.printf("Key %s: ScanCode 0x%X on Device %d\n", 
-        pressed ? "DOWN" : "UP", scanCode, handle);
-});
-```
-
----
-
-## Try the Demo
-
-1. Clone this repository.
-2. Run `compile.bat`.
-3. Run `mvn exec:java -Dexec.mainClass="fastkeyboard.Demo"`.
 
 ---
 
@@ -143,19 +129,22 @@ keyboard.startListening((handle, vKey, scanCode, pressed, isExtended) -> {
 
 ---
 
-## Platform Support
+## Documentation
 
-| Platform | Status |
-|----------|--------|
-| Windows 10/11 (x64) | ✅ Fully Supported |
-| Linux | 🚧 Planned |
-| macOS | 🚧 Planned |
+* **[COMPILE.md](COMPILE.md)**: Full compilation guide (MSVC C++17 build chain + JNI Setup).
+* **[REFERENCE.md](REFERENCE.md)**: Full API descriptions, border configurations, and codepoint index.
+* **[PHILOSOPHIE.md](PHILOSOPHIE.md)**: The engineering rationale for zero-allocation performance.
+* **[ROADMAP.md](ROADMAP.md)**: Future milestones and planned features.
 
 ---
 
-## Building from Source
+## Platform Support
 
-For detailed instructions on compiling the C++ JNI code and building the project, see [COMPILE.md](COMPILE.md).
+| Platform      | Status            |
+|---------------|-------------------|
+| Windows 10/11 | ✅ Fully Supported |
+| Linux         | 🚧 Planned        |
+| macOS         | 🚧 Planned        |
 
 ---
 
@@ -175,11 +164,6 @@ MIT License — See [LICENSE](LICENSE) file for details.
 ---
 **Part of the FastJava Ecosystem** — *Making the JVM faster.*
 
-
-
-<!-- 
-SEO Keywords: java, jni, native, fastjava, windows api, rawinput, keyboard hook, low latency, keylogger, telemetrie 
--->
 
 
 
