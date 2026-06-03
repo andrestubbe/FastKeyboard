@@ -1,4 +1,4 @@
-﻿# FastKeyboard — Native Windows RawInput API for Java [v0.1.0]
+# FastKeyboard � Native Windows RawInput API for Java [v0.1.0]
 
 [![Status](https://img.shields.io/badge/status-v0.1.0-brightgreen.svg)](https://github.com/andrestubbe/FastKeyboard/releases/tag/v0.1.0)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -6,7 +6,7 @@
 [![Platform](https://img.shields.io/badge/Platform-Windows%2010+-lightgrey.svg)]()
 [![JitPack](https://img.shields.io/badge/JitPack-ready-green.svg)](https://jitpack.io/#andrestubbe)
 
-**⚡ High-performance, background-capable raw keyboard interception for Java.**
+**? High-performance, background-capable raw keyboard interception for Java.**
 
 [![FastKeyboard Showcase](docs/screenshot.png)](https://www.youtube.com/watch?v=BZsqQl7WqWk)
 
@@ -51,12 +51,12 @@ Standard Java APIs (AWT `KeyListener` or `WM_KEYDOWN`) are often too slow or lim
 
 ## Key Features
 
-- **🚀 Native Performance** — Direct Win32 RawInput access via JNI.
-- **⚡ Zero Overhead** — No polling, purely event-driven callbacks.
-- **🛡️ Hardware Scancodes** — Get immutable "Make Codes" instead of layout-dependent virtual keys.
-- **📦 Multi-Device Support** — Identify which physical keyboard sent the input (HID handle tracking).
-- **📦 Background Capture** — Intercept keys even when your Java app is minimized or hidden.
-- **💎 Zero GC Pressure** — High-performance event dispatching with minimal memory allocation.
+- **?? Native Performance** � Direct Win32 RawInput access via JNI.
+- **? Zero Overhead** � No polling, purely event-driven callbacks.
+- **??? Hardware Scancodes** � Get immutable "Make Codes" instead of layout-dependent virtual keys.
+- **?? Multi-Device Support** � Identify which physical keyboard sent the input (HID handle tracking).
+- **?? Background Capture** � Intercept keys even when your Java app is minimized or hidden.
+- **?? Zero GC Pressure** � High-performance event dispatching with minimal memory allocation.
 
 ---
 
@@ -113,8 +113,8 @@ dependencies {
 ### Option 3: Direct Download (No Build Tool)
 Download the latest JARs directly to add them to your classpath:
 
-1. 📦 **[fastkeyboard-v0.1.0.jar](https://github.com/andrestubbe/FastKeyboard/releases/download/v0.1.0/fastkeyboard-v0.1.0.jar)** (The Core Library)
-2. ⚙️ **[fastcore-v0.1.0.jar](https://github.com/andrestubbe/FastCore/releases/download/v0.1.0/fastcore-v0.1.0.jar)** (The Mandatory Native Loader)
+1. ?? **[fastkeyboard-v0.1.0.jar](https://github.com/andrestubbe/FastKeyboard/releases/download/v0.1.0/fastkeyboard-v0.1.0.jar)** (The Core Library)
+2. ?? **[fastcore-v0.1.0.jar](https://github.com/andrestubbe/FastCore/releases/download/v0.1.0/fastcore-v0.1.0.jar)** (The Mandatory Native Loader)
 
 ---
 
@@ -133,7 +133,7 @@ Download the latest JARs directly to add them to your classpath:
 
 * **[COMPILE.md](COMPILE.md)**: Full compilation guide (MSVC C++17 build chain + JNI Setup).
 * **[REFERENCE.md](docs/REFERENCE.md)**: Full API descriptions, border configurations, and codepoint index.
-* **[PHILOSOPHIE.md](docs/PHILOSOPHIE.md)**: The engineering rationale for zero-allocation performance.
+* **[PHILOSOPHY.md](docs/PHILOSOPHY.md)**: The engineering rationale for zero-allocation performance.
 * **[ROADMAP.md](docs/ROADMAP.md)**: Future milestones and planned features.
 
 ---
@@ -142,27 +142,27 @@ Download the latest JARs directly to add them to your classpath:
 
 | Platform      | Status            |
 |---------------|-------------------|
-| Windows 10/11 | ✅ Fully Supported |
-| Linux         | 🚧 Planned        |
-| macOS         | 🚧 Planned        |
+| Windows 10/11 | ? Fully Supported |
+| Linux         | ?? Planned        |
+| macOS         | ?? Planned        |
 
 ---
 
 ## License
-MIT License — See [LICENSE](LICENSE) file for details.
+MIT License � See [LICENSE](LICENSE) file for details.
 
 ---
 
 ## Related Projects
-- [FastCore](https://github.com/andrestubbe/FastCore) — Native Library Loader & JNI Utilities for Java
-- [FastMouse](https://github.com/andrestubbe/FastMouse) — High-Performance Native Mouse API for Java
-- [FastHotkey](https://github.com/andrestubbe/FastHotkey) — Low-Latency Global Hotkey API for Java
-- [FastKeylogger](https://github.com/andrestubbe/FastKeylogger) — Behavioral Typing Logic for Java
-- [FastTouch](https://github.com/andrestubbe/FastTouch) — Native touchscreen input for Java
-- [FastStylus](https://github.com/andrestubbe/FastStylus) — Native Stylus/Pen Input for Java
+- [FastCore](https://github.com/andrestubbe/FastCore) � Native Library Loader & JNI Utilities for Java
+- [FastMouse](https://github.com/andrestubbe/FastMouse) � High-Performance Native Mouse API for Java
+- [FastHotkey](https://github.com/andrestubbe/FastHotkey) � Low-Latency Global Hotkey API for Java
+- [FastKeylogger](https://github.com/andrestubbe/FastKeylogger) � Behavioral Typing Logic for Java
+- [FastTouch](https://github.com/andrestubbe/FastTouch) � Native touchscreen input for Java
+- [FastStylus](https://github.com/andrestubbe/FastStylus) � Native Stylus/Pen Input for Java
 
 ---
-**Part of the FastJava Ecosystem** — *Making the JVM faster.*
+**Part of the FastJava Ecosystem** � *Making the JVM faster.*
 
 
 
