@@ -29,11 +29,11 @@ public class Demo {
             String state = isPressed ? "DOWN" : "UP  ";
             String charDisplay = (keyChar != null && !keyChar.isEmpty()) ? "['" + keyChar + "']" : "    ";
             
-            System.out.printf("[%d] [%s] Handle:%d | VKey:0x%02X | ScanCode:0x%02X | %s\n", 
-                timestamp, state, deviceHandle, vKey, makeCode, charDisplay);
+            System.out.printf("[%d] [%s] Handle:%d | VKey:0x%02X (%s) | ScanCode:0x%02X | %s\n", 
+                timestamp, state, deviceHandle, vKey, Keys.getName(vKey), makeCode, charDisplay);
 
-            // Exit on Escape key (VKey 0x1B)
-            if (vKey == 0x1B && !isPressed) {
+            // Exit on Escape key (Keys.ESCAPE)
+            if (vKey == Keys.ESCAPE && !isPressed) {
                 System.out.println("\n[ENGINE] ESC detected. Stopping...");
                 keyboard.stopListening();
                 System.exit(0);

@@ -1,4 +1,5 @@
 fastkeyboard\FastKeyboardImpl.class
 fastkeyboard\FastKeyboard.class
+fastkeyboard\Keys.class
 fastkeyboard\FastKeyboardListener.class
 fastkeyboard\KeyboardDevice.class
