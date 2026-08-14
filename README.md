@@ -12,6 +12,21 @@
 
 ---
 
+## Quick Start
+
+```java
+FastKeyboard keyboard = FastKeyboard.open();
+
+keyboard.startListening((handle, vKey, scanCode, pressed, isExtended) -> {
+    System.out.printf("Key %s: ScanCode 0x%X on Device %d\n",
+        pressed ? "DOWN" : "UP", scanCode, handle);
+});
+```
+
+---
+
+---
+
 ## Table of Contents
 
 - [Key Features](#key-features)
@@ -25,18 +40,6 @@
 
 ---
 
-## Quick Start
-
-```java
-FastKeyboard keyboard = FastKeyboard.open();
-
-keyboard.startListening((handle, vKey, scanCode, pressed, isExtended) -> {
-    System.out.printf("Key %s: ScanCode 0x%X on Device %d\n",
-        pressed ? "DOWN" : "UP", scanCode, handle);
-});
-```
-
----
 
 ## Why Raw Input?
 
