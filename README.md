@@ -49,8 +49,8 @@ public class Demo {
 - [Why FastKeyboard?](#why-fastkeyboard)
 - [Quick Start](#quick-start)
 - [Key Features](#key-features)
-- [Window Binding & Focus Gating](#window-binding--focus-gating)
 - [Real-World Use Cases](#real-world-use-cases)
+- [Window Binding & Focus Gating](#window-binding--focus-gating)
 - [Performance Benchmarks](#performance-benchmarks)
 - [API Quick Reference](#api-quick-reference)
 - [Technical Examples & Hero Demos](#technical-examples--hero-demos)
@@ -92,6 +92,15 @@ Standard Java keyboard handling (like AWT `KeyListener`, JavaFX, or polling `Get
 
 ---
 
+## Real-World Use Cases
+
+- 🎮 **Competitive Gaming & Rhythm Engines**: Intercept unbuffered raw keystrokes at sub-millisecond precision without the GC stutter or event coalescing of the AWT Event Dispatch Thread (EDT).
+- 📟 **High-Speed Terminal Emulators ([FastTerminal](https://github.com/andrestubbe/FastTerminal)) & TUI ([FastTUI](https://github.com/andrestubbe/FastTUI))**: Ultra-responsive CLI interfaces with native focus gating, ensuring keystrokes only register when the console window is active.
+- 🏷️ **Industrial Barcode & RFID Scanners**: Multi-device HID tracking separates incoming automated scanner input streams from manual user typing on the same workstation.
+- ⌨️ **Global Hotkey & Desktop Telemetry**: Background hotkey engines that reliably capture key chords across multi-monitor environments even when the app is minimized.
+
+---
+
 ## Window Binding & Focus Gating
 
 FastKeyboard supports seamless switching between **Global Interception** (for bots, hotkeys, screen recorders) and **Window-Bound Capture** (for UI, games, FastVulkan, FastTerminal):
@@ -108,15 +117,6 @@ keyboard.bindToWindow(window.getHWND());
 
 > [!NOTE]
 > Window focus verification happens directly in the native C++ message loop via `GetForegroundWindow()`. When the window is inactive, events are discarded immediately with **0 JNI traversals** and **0 JVM allocations**.
-
----
-
-## Real-World Use Cases
-
-- 🎮 **Competitive Gaming & Rhythm Engines**: Intercept unbuffered raw keystrokes at sub-millisecond precision without the GC stutter or event coalescing of the AWT Event Dispatch Thread (EDT).
-- 📟 **High-Speed Terminal Emulators ([FastTerminal](https://github.com/andrestubbe/FastTerminal)) & TUI ([FastTUI](https://github.com/andrestubbe/FastTUI))**: Ultra-responsive CLI interfaces with native focus gating, ensuring keystrokes only register when the console window is active.
-- 🏷️ **Industrial Barcode & RFID Scanners**: Multi-device HID tracking separates incoming automated scanner input streams from manual user typing on the same workstation.
-- ⌨️ **Global Hotkey & Desktop Telemetry**: Background hotkey engines that reliably capture key chords across multi-monitor environments even when the app is minimized.
 
 ---
 
