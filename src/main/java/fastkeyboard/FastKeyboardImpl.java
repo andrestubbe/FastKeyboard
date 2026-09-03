@@ -102,8 +102,13 @@ public class FastKeyboardImpl implements FastKeyboard {
         }
     }
 
+    static long getConsoleWindowHandle() {
+        return nGetConsoleWindow();
+    }
+
     private native long nStart(Object callbackObject, long targetWindowHandle);
     private native void nBindWindow(long handle, long targetWindowHandle);
     private native void nStop(long handle);
     private native void nGetDevices(List<KeyboardDevice> outList);
+    private static native long nGetConsoleWindow();
 }

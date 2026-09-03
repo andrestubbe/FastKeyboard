@@ -95,4 +95,11 @@ public interface FastKeyboard extends AutoCloseable {
      * Returns the currently bound window handle (HWND), or 0 if listening globally.
      */
     long getBoundWindow();
+
+    /**
+     * Retrieves the native console window handle (HWND) if running in a console.
+     */
+    static long getConsoleWindow() {
+        return FastKeyboardImpl.getConsoleWindowHandle();
+    }
 }

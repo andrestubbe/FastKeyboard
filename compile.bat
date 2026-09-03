@@ -63,6 +63,7 @@ cl.exe /LD /O2 /EHsc /Fe:release\%PROJECT_NAME%.dll native\fastkeyboard.cpp /I"!
 if %ERRORLEVEL% EQU 0 (
     copy /Y release\%PROJECT_NAME%.dll src\main\resources\native\%PROJECT_NAME%.dll >nul
     copy /Y release\%PROJECT_NAME%.dll "!FASTCORE_DIR!\%PROJECT_NAME%.dll" >nul
+    powershell -NoProfile -Command "Unblock-File -Path '!FASTCORE_DIR!\%PROJECT_NAME%.dll', 'release\%PROJECT_NAME%.dll', 'src\main\resources\native\%PROJECT_NAME%.dll' -ErrorAction SilentlyContinue" >nul 2>&1
     echo.
     echo ===========================================
     echo [SUCCESS] FastKeyboard native DLL built!

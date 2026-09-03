@@ -28,15 +28,41 @@ std::string WideToUTF8(const std::wstring& wstr) {
     return strTo;
 }
 
+// Check if target window or any of its children/hosts is currently focused (FastTerminal logic)
+static inline bool IsWindowFocused(HWND targetHwnd) {
+    if (targetHwnd == NULL) return true;
+    HWND fgWindow = GetForegroundWindow();
+    if (fgWindow == NULL) return false;
+    if (fgWindow == targetHwnd) return true;
+
+    // Check root ancestors and owner window trees (crucial for wt.exe / Windows Terminal / Swing / Canvas)
+    if (GetAncestor(targetHwnd, GA_ROOT) == fgWindow) return true;
+    if (GetAncestor(targetHwnd, GA_ROOTOWNER) == fgWindow) return true;
+    if (GetAncestor(fgWindow, GA_ROOT) == targetHwnd) return true;
+
+    // Walk parent hierarchy to handle embedded hosts
+    HWND parent = targetHwnd;
+    while ((parent = GetParent(parent)) != NULL) {
+        if (parent == fgWindow) return true;
+    }
+
+    // Process ID matching: If both belong to the exact same process (e.g. Windows Terminal / Console host)
+    DWORD fgPid = 0, targetPid = 0;
+    GetWindowThreadProcessId(fgWindow, &fgPid);
+    GetWindowThreadProcessId(targetHwnd, &targetPid);
+    if (fgPid != 0 && fgPid == targetPid) {
+        return true;
+    }
+
+    return false;
+}
+
 // Window Procedure to handle Raw Input
 LRESULT CALLBACK RawInputWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
     if (msg == WM_INPUT) {
         // Fast Window-Focus Gating: If target window is specified, only process when active!
-        if (g_ctx && g_ctx->targetHwnd != NULL) {
-            HWND fgWindow = GetForegroundWindow();
-            if (fgWindow != g_ctx->targetHwnd) {
-                return 0; // Target window does NOT have focus -> Zero CPU overhead, skip!
-            }
+        if (g_ctx && g_ctx->targetHwnd != NULL && !IsWindowFocused(g_ctx->targetHwnd)) {
+            return 0; // Target window does NOT have focus -> Zero CPU overhead, skip!
         }
 
         UINT dwSize;
@@ -181,6 +207,57 @@ JNIEXPORT void JNICALL Java_fastkeyboard_FastKeyboardImpl_nGetDevices(JNIEnv* en
             env->DeleteLocalRef(deviceObj);
         }
     }
+}
+
+static BOOL CALLBACK FindTerminalChildEnum(HWND hwnd, LPARAM lParam) {
+    char className[256];
+    if (GetClassNameA(hwnd, className, sizeof(className))) {
+        if (strstr(className, "TermControl") != NULL || 
+            strstr(className, "Console") != NULL ||
+            strstr(className, "VirtualConsole") != NULL) {
+            if (IsWindowVisible(hwnd)) {
+                *(HWND*)lParam = hwnd;
+                return FALSE; // Found active visible terminal panel, stop!
+            }
+        }
+    }
+    return TRUE;
+}
+
+JNIEXPORT jlong JNICALL Java_fastkeyboard_FastKeyboardImpl_nGetConsoleWindow(JNIEnv* env, jclass clazz) {
+    HWND hwnd = GetConsoleWindow();
+    
+    // Check if we are hosted under Windows Terminal or another root container
+    HWND hwndForeground = GetForegroundWindow();
+    if (hwndForeground != NULL) {
+        bool isOurWindow = (hwndForeground == hwnd);
+        if (!isOurWindow) {
+            HWND parent = hwnd;
+            while (parent != NULL) {
+                if (parent == hwndForeground) {
+                    isOurWindow = true;
+                    break;
+                }
+                parent = GetParent(parent);
+            }
+            if (!isOurWindow) {
+                if (GetAncestor(hwnd, GA_ROOT) == hwndForeground || GetAncestor(hwnd, GA_ROOTOWNER) == hwndForeground) {
+                    isOurWindow = true;
+                }
+            }
+        }
+        if (isOurWindow) {
+            HWND hwndTerminalChild = NULL;
+            EnumChildWindows(hwndForeground, FindTerminalChildEnum, (LPARAM)&hwndTerminalChild);
+            if (hwndTerminalChild != NULL) {
+                hwnd = hwndTerminalChild;
+            } else {
+                hwnd = hwndForeground;
+            }
+        }
+    }
+    
+    return (jlong)hwnd;
 }
 
 } // extern "C"
