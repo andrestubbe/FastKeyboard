@@ -15,14 +15,27 @@ public class FastKeyboardImpl implements FastKeyboard {
     }
 
     private long nativeHandle = 0;
+    private long targetWindowHandle = 0;
     private boolean isListening = false;
     private FastKeyboardListener currentListener;
+
+    public FastKeyboardImpl() {
+        this(0);
+    }
+
+    public FastKeyboardImpl(long targetWindowHandle) {
+        this.targetWindowHandle = targetWindowHandle;
+    }
+
+    // ═══════════════════════════════════════════════════════════
+    // Events & Lifecycle
+    // ═══════════════════════════════════════════════════════════
 
     @Override
     public void startListening(FastKeyboardListener listener) {
         if (isListening) return;
         this.currentListener = listener;
-        this.nativeHandle = nStart(this);
+        this.nativeHandle = nStart(this, targetWindowHandle);
         this.isListening = true;
     }
 
@@ -34,6 +47,18 @@ public class FastKeyboardImpl implements FastKeyboard {
         nativeHandle = 0;
     }
 
+    // ═══════════════════════════════════════════════════════════
+    // Normal Methods (Binding & Devices)
+    // ═══════════════════════════════════════════════════════════
+
+    @Override
+    public void bindToWindow(long targetWindowHandle) {
+        this.targetWindowHandle = targetWindowHandle;
+        if (nativeHandle != 0) {
+            nBindWindow(nativeHandle, targetWindowHandle);
+        }
+    }
+
     @Override
     public List<KeyboardDevice> getConnectedDevices() {
         List<KeyboardDevice> devices = new ArrayList<>();
@@ -41,12 +66,32 @@ public class FastKeyboardImpl implements FastKeyboard {
         return devices;
     }
 
+    // ═══════════════════════════════════════════════════════════
+    // Is / Has
+    // ═══════════════════════════════════════════════════════════
+
     @Override
     public boolean isListening() {
         return isListening;
     }
 
-    // --- Native Callbacks ---
+    @Override
+    public boolean isWindowBound() {
+        return targetWindowHandle != 0;
+    }
+
+    // ═══════════════════════════════════════════════════════════
+    // Getter
+    // ═══════════════════════════════════════════════════════════
+
+    @Override
+    public long getBoundWindow() {
+        return targetWindowHandle;
+    }
+
+    // ═══════════════════════════════════════════════════════════
+    // Native Callbacks & Methods
+    // ═══════════════════════════════════════════════════════════
 
     /**
      * Called by C++ JNI layer when a key event occurs.
@@ -57,9 +102,8 @@ public class FastKeyboardImpl implements FastKeyboard {
         }
     }
 
-    // --- Native Methods ---
-
-    private native long nStart(Object callbackObject);
+    private native long nStart(Object callbackObject, long targetWindowHandle);
+    private native void nBindWindow(long handle, long targetWindowHandle);
     private native void nStop(long handle);
     private native void nGetDevices(List<KeyboardDevice> outList);
 }

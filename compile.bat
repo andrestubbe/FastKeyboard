@@ -1,33 +1,75 @@
 @echo off
+setlocal enabledelayedexpansion
 set PROJECT_NAME=fastkeyboard
-set JAVA_PATH=C:\Program Files\Java\jdk-25
-set VS_PATH=C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools
 
 echo ===========================================
-echo FastKeyboard Native Builder (v0.1.0)
+echo FastKeyboard Native Builder (FastJava Standard)
 echo ===========================================
 
-if not exist build mkdir build
+:: Auto-detect Visual Studio via vswhere
+set "VSWHERE=%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\vswhere.exe"
+if exist "!VSWHERE!" (
+    for /f "usebackq tokens=*" %%i in (`"!VSWHERE!" -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath`) do (
+        set "VS_PATH=%%i"
+    )
+)
+
+if not defined VS_PATH (
+    if exist "C:\Program Files\Microsoft Visual Studio\18\Community\VC\Auxiliary\Build\vcvars64.bat" (
+        set "VS_PATH=C:\Program Files\Microsoft Visual Studio\18\Community"
+    ) else if exist "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat" (
+        set "VS_PATH=C:\Program Files\Microsoft Visual Studio\2022\Community"
+    ) else if exist "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Auxiliary\Build\vcvars64.bat" (
+        set "VS_PATH=C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools"
+    )
+)
+
+if not defined VS_PATH (
+    echo ERROR: Visual Studio not found!
+    exit /b 1
+)
+
+echo Found Visual Studio at: !VS_PATH!
+
+:: Detect JAVA_HOME
+if not defined JAVA_HOME (
+    if exist "C:\Program Files\Java\jdk-21.0.12.1" (
+        set "JAVA_HOME=C:\Program Files\Java\jdk-21.0.12.1"
+    ) else if exist "C:\Program Files\Java\jdk-25" (
+        set "JAVA_HOME=C:\Program Files\Java\jdk-25"
+    ) else if exist "C:\Program Files\Java\jdk-17" (
+        set "JAVA_HOME=C:\Program Files\Java\jdk-17"
+    )
+)
+
+if not defined JAVA_HOME (
+    echo ERROR: JAVA_HOME not found!
+    exit /b 1
+)
+
+echo Using JAVA_HOME: !JAVA_HOME!
+
+call "!VS_PATH!\VC\Auxiliary\Build\vcvars64.bat"
+
+if not exist release mkdir release
 if not exist src\main\resources\native mkdir src\main\resources\native
-
-echo.
-echo Using JDK: %JAVA_PATH%
-echo Using VS:  %VS_PATH%
-
-call "%VS_PATH%\VC\Auxiliary\Build\vcvars64.bat"
+set "FASTCORE_DIR=%USERPROFILE%\.fastcore\native\%PROJECT_NAME%"
+if not exist "!FASTCORE_DIR!" mkdir "!FASTCORE_DIR!"
 
 echo.
 echo Compiling C++ Native Library...
-cl.exe /LD /Fe:src\main\resources\native\%PROJECT_NAME%.dll native\fastkeyboard.cpp /I"%JAVA_PATH%\include" /I"%JAVA_PATH%\include\win32" /EHsc /link /SUBSYSTEM:WINDOWS user32.lib gdi32.lib
+cl.exe /LD /O2 /EHsc /Fe:release\%PROJECT_NAME%.dll native\fastkeyboard.cpp /I"!JAVA_HOME!\include" /I"!JAVA_HOME!\include\win32" /link /SUBSYSTEM:WINDOWS user32.lib gdi32.lib
 
 if %ERRORLEVEL% EQU 0 (
+    copy /Y release\%PROJECT_NAME%.dll src\main\resources\native\%PROJECT_NAME%.dll >nul
+    copy /Y release\%PROJECT_NAME%.dll "!FASTCORE_DIR!\%PROJECT_NAME%.dll" >nul
     echo.
     echo ===========================================
-    echo BUILD SUCCESSFUL 
-    echo DLL Location: src\main\resources\native\%PROJECT_NAME%.dll
+    echo [SUCCESS] FastKeyboard native DLL built!
+    echo Copied to release\, resources\native\, and .fastcore
     echo ===========================================
 ) else (
     echo.
     echo !!!!!!!!! BUILD FAILED !!!!!!!!!
-    pause
+    exit /b 1
 )

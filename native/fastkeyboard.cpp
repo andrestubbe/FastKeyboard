@@ -11,10 +11,13 @@ static jobject g_javaObject = nullptr;
 static JavaVM* g_jvm = nullptr;
 
 struct KeyboardThreadContext {
-    HWND hwnd;
-    std::atomic<bool> running;
+    HWND hwnd = NULL;
+    HWND targetHwnd = NULL; // Focus-gating window handle (NULL = global capture)
+    std::atomic<bool> running{ false };
     std::thread loopThread;
 };
+
+static KeyboardThreadContext* g_ctx = nullptr;
 
 // Helper: Convert Wide string to UTF-8
 std::string WideToUTF8(const std::wstring& wstr) {
@@ -28,6 +31,14 @@ std::string WideToUTF8(const std::wstring& wstr) {
 // Window Procedure to handle Raw Input
 LRESULT CALLBACK RawInputWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
     if (msg == WM_INPUT) {
+        // Fast Window-Focus Gating: If target window is specified, only process when active!
+        if (g_ctx && g_ctx->targetHwnd != NULL) {
+            HWND fgWindow = GetForegroundWindow();
+            if (fgWindow != g_ctx->targetHwnd) {
+                return 0; // Target window does NOT have focus -> Zero CPU overhead, skip!
+            }
+        }
+
         UINT dwSize;
         GetRawInputData((HRAWINPUT)lParam, RID_INPUT, NULL, &dwSize, sizeof(RAWINPUTHEADER));
         
@@ -104,17 +115,26 @@ void MessageLoop(KeyboardThreadContext* ctx) {
 
 extern "C" {
 
-JNIEXPORT jlong JNICALL Java_fastkeyboard_FastKeyboardImpl_nStart(JNIEnv* env, jobject obj) {
+JNIEXPORT jlong JNICALL Java_fastkeyboard_FastKeyboardImpl_nStart(JNIEnv* env, jobject obj, jlong targetWindowHandle) {
     env->GetJavaVM(&g_jvm);
     g_javaObject = env->NewGlobalRef(obj);
     jclass clazz = env->GetObjectClass(obj);
     g_dispatchMethod = env->GetMethodID(clazz, "dispatchKeyEvent", "(JIIZZJLjava/lang/String;)V");
 
     KeyboardThreadContext* ctx = new KeyboardThreadContext();
+    ctx->targetHwnd = (HWND)targetWindowHandle;
     ctx->running = true;
+    g_ctx = ctx;
     ctx->loopThread = std::thread(MessageLoop, ctx);
     
     return (jlong)ctx;
+}
+
+JNIEXPORT void JNICALL Java_fastkeyboard_FastKeyboardImpl_nBindWindow(JNIEnv* env, jobject obj, jlong handle, jlong targetWindowHandle) {
+    KeyboardThreadContext* ctx = (KeyboardThreadContext*)handle;
+    if (ctx) {
+        ctx->targetHwnd = (HWND)targetWindowHandle;
+    }
 }
 
 JNIEXPORT void JNICALL Java_fastkeyboard_FastKeyboardImpl_nStop(JNIEnv* env, jobject obj, jlong handle) {
@@ -125,6 +145,7 @@ JNIEXPORT void JNICALL Java_fastkeyboard_FastKeyboardImpl_nStop(JNIEnv* env, job
         if (ctx->loopThread.joinable()) ctx->loopThread.join();
         
         env->DeleteGlobalRef(g_javaObject);
+        if (g_ctx == ctx) g_ctx = nullptr;
         delete ctx;
     }
 }
