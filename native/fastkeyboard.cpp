@@ -28,30 +28,27 @@ std::string WideToUTF8(const std::wstring& wstr) {
     return strTo;
 }
 
-// Check if target window or any of its children/hosts is currently focused (FastTerminal logic)
+// Check if target window or any of its children/hosts is currently focused
 static inline bool IsWindowFocused(HWND targetHwnd) {
     if (targetHwnd == NULL) return true;
     HWND fgWindow = GetForegroundWindow();
     if (fgWindow == NULL) return false;
     if (fgWindow == targetHwnd) return true;
 
-    // Check root ancestors and owner window trees (crucial for wt.exe / Windows Terminal / Swing / Canvas)
+    // Direct ancestor & parent checks
     if (GetAncestor(targetHwnd, GA_ROOT) == fgWindow) return true;
     if (GetAncestor(targetHwnd, GA_ROOTOWNER) == fgWindow) return true;
     if (GetAncestor(fgWindow, GA_ROOT) == targetHwnd) return true;
+    if (GetAncestor(fgWindow, GA_ROOT) == GetAncestor(targetHwnd, GA_ROOT)) return true;
 
     // Walk parent hierarchy to handle embedded hosts
     HWND parent = targetHwnd;
     while ((parent = GetParent(parent)) != NULL) {
         if (parent == fgWindow) return true;
     }
-
-    // Process ID matching: If both belong to the exact same process (e.g. Windows Terminal / Console host)
-    DWORD fgPid = 0, targetPid = 0;
-    GetWindowThreadProcessId(fgWindow, &fgPid);
-    GetWindowThreadProcessId(targetHwnd, &targetPid);
-    if (fgPid != 0 && fgPid == targetPid) {
-        return true;
+    parent = fgWindow;
+    while ((parent = GetParent(parent)) != NULL) {
+        if (parent == targetHwnd) return true;
     }
 
     return false;
@@ -123,7 +120,11 @@ void MessageLoop(KeyboardThreadContext* ctx) {
     wc.lpszClassName = "FastKeyboardInternal";
     RegisterClassEx(&wc);
 
-    ctx->hwnd = CreateWindowEx(0, wc.lpszClassName, NULL, 0, 0, 0, 0, 0, HWND_MESSAGE, NULL, wc.hInstance, NULL);
+    // Note: RIDEV_INPUTSINK requires a top-level window (cannot be HWND_MESSAGE)!
+    ctx->hwnd = CreateWindowEx(
+        WS_EX_TOOLWINDOW, wc.lpszClassName, "FastKeyboardHiddenWindow",
+        WS_POPUP, 0, 0, 0, 0, NULL, NULL, wc.hInstance, NULL
+    );
 
     RAWINPUTDEVICE rid;
     rid.usUsagePage = 0x01;

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * JNI Implementation of FastKeyboard using Win32 RawInput.
+ * JNI Implementation of {@link FastKeyboard} using Win32 RawInput.
  */
 public class FastKeyboardImpl implements FastKeyboard {
     
@@ -19,17 +19,21 @@ public class FastKeyboardImpl implements FastKeyboard {
     private boolean isListening = false;
     private FastKeyboardListener currentListener;
 
+    /**
+     * Creates a new global FastKeyboardImpl instance.
+     */
     public FastKeyboardImpl() {
         this(0);
     }
 
+    /**
+     * Creates a new FastKeyboardImpl instance bound to a specific Win32 window (HWND).
+     *
+     * @param targetWindowHandle Native HWND of the target window (or 0 for global)
+     */
     public FastKeyboardImpl(long targetWindowHandle) {
         this.targetWindowHandle = targetWindowHandle;
     }
-
-    // ═══════════════════════════════════════════════════════════
-    // Events & Lifecycle
-    // ═══════════════════════════════════════════════════════════
 
     @Override
     public void startListening(FastKeyboardListener listener) {
@@ -47,10 +51,6 @@ public class FastKeyboardImpl implements FastKeyboard {
         nativeHandle = 0;
     }
 
-    // ═══════════════════════════════════════════════════════════
-    // Normal Methods (Binding & Devices)
-    // ═══════════════════════════════════════════════════════════
-
     @Override
     public void bindToWindow(long targetWindowHandle) {
         this.targetWindowHandle = targetWindowHandle;
@@ -66,10 +66,6 @@ public class FastKeyboardImpl implements FastKeyboard {
         return devices;
     }
 
-    // ═══════════════════════════════════════════════════════════
-    // Is / Has
-    // ═══════════════════════════════════════════════════════════
-
     @Override
     public boolean isListening() {
         return isListening;
@@ -80,18 +76,10 @@ public class FastKeyboardImpl implements FastKeyboard {
         return targetWindowHandle != 0;
     }
 
-    // ═══════════════════════════════════════════════════════════
-    // Getter
-    // ═══════════════════════════════════════════════════════════
-
     @Override
     public long getBoundWindow() {
         return targetWindowHandle;
     }
-
-    // ═══════════════════════════════════════════════════════════
-    // Native Callbacks & Methods
-    // ═══════════════════════════════════════════════════════════
 
     /**
      * Called by C++ JNI layer when a key event occurs.
@@ -102,6 +90,9 @@ public class FastKeyboardImpl implements FastKeyboard {
         }
     }
 
+    /**
+     * Resolves the current console window HWND handle.
+     */
     static long getConsoleWindowHandle() {
         return nGetConsoleWindow();
     }

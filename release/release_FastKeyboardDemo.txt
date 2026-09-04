@@ -1,0 +1,65 @@
+================================================================================
+YOUTUBE VIDEO RELEASE
+================================================================================
+
+TITLE:
+FastKeyboard: Zero-Latency Native Raw Input Keyboard Engine for Java (Hardware Scancodes & Multi-Device)
+
+DESCRIPTION:
+Standard Java KeyListeners and AWT/Swing focus bindings suffer from OS buffer queues, layout delays, and desktop-level abstraction layers. What happens when you bypass all of that and tap directly into the Windows Win32 Raw Input hardware subsystem from Java?
+
+In this showcase, FastKeyboard delivers microsecond hardware keyboard interception, physical make/break scancodes, virtual key mapping, Unicode character translation, and intelligent window-focus gating directly inside Java on Windows 10 & 11.
+
+Whether for high-performance gaming engines, low-latency terminal emulators, audio workstation shortcuts, or hardware monitoring: FastKeyboard provides direct access to individual physical keyboard device handles, zero heap allocations on the hot path, and zero CPU consumption when your target window is unfocused.
+
+TECHNICAL HIGHLIGHTS:
+* Win32 Raw Input Interception: Direct hardware-level keyboard packet stream (RIDEV_INPUTSINK) bypassing OS message queues and standard KeyListener lag.
+* Physical Hardware Scancodes: Direct access to make/break scancodes (0x01..0xFF), E0 extended keys, and virtual key codes.
+* Real-Time Unicode Translation: Native ToUnicode translation on keydown for layout-aware character resolution with zero overhead.
+* Multi-Keyboard Hardware Enumeration: Detects and differentiates between multiple physical keyboards and macro controllers simultaneously.
+* Intelligent Window-Focus Gating: Deep Win32 hierarchy traversal (Windows Terminal / wt.exe, conhost, custom HWND, Vulkan, Swing) ensuring 0% CPU overhead when unfocused.
+* Dynamic Runtime Mode Switching: Seamlessly toggle between Window-Bound Focus and Global Interception on-the-fly.
+* Zero-Allocation Native Pipeline: Ultra-fast JNI dispatch designed for steady frame rates and zero GC jitter.
+
+GITHUB REPOSITORIES:
+* FastKeyboard: https://github.com/andrestubbe/FastKeyboard
+* FastMouse: https://github.com/andrestubbe/FastMouse
+* FastTerminal: https://github.com/andrestubbe/FastTerminal
+* FastCore: https://github.com/andrestubbe/FastCore
+
+OUR PHILOSOPHY:
+Direct hardware access. Zero-latency raw input. Sub-millisecond timing. Zero framework overhead. Making the JVM faster.
+
+TAGS:
+Java, FastJava, FastKeyboard, FastMouse, RawInput, Win32, JNI, GamingInJava, HighPerformanceJava, ZeroLatency, GameDev, WindowsTerminal, MultiKeyboard, HardwareScancodes
+
+
+================================================================================
+LINKEDIN POST (ANDRE STUBBE STYLE)
+================================================================================
+
+AWT und Swing KeyListener in Java: Event-Queue-Lags, Fokus-Probleme bei Konsolenanwendungen, fehlende physische Hardware-Scancodes und keine saubere Trennung mehrerer Keyboards.
+
+Deshalb habe ich FastKeyboard gebaut: Direkter Zugriff auf das Win32 Raw Input Subsystem unter Windows 10 & 11 – direkt aus Java heraus.
+
+Was die Demo zeigt:
+* Echte physische Hardware-Scancodes (Make/Break, E0 Extended Flags) in Mikrosekunden, unbeeinflusst von UI-Event-Loops
+* Multi-Device Enumeration: Erkennt und unterscheidet mehrere physische Tastaturen getrennt nach HID-Handles
+* Window-Focus Gating: Erkennt verschachtelte Win32-Fensterbaeume (inklusive modernem Windows Terminal wt.exe, conhost und nativen Fenstern) und schaltet die CPU-Last auf 0%, sobald das Fenster inaktiv ist
+* Real-Time Unicode Translation: Layout-getreue Zeichenaufloesung direkt nativ via ToUnicode
+* Dynamisches Umschalten: Fliessender Wechsel zwischen Window-Bound Focus und Globaler Interception zur Laufzeit
+
+Kein Ruckeln, keine Heap-Allokationen im Hotpath, keine GC-Pausen.
+
+Java muss bei Low-Level-Input nicht hinter C++ oder Rust hinterherhinken. Man muss dem Betriebssystem nur auf Hardware-Ebene zuhoeren.
+
+GitHub Repository:
+https://github.com/andrestubbe/FastKeyboard
+
+YouTube Showcase:
+https://youtu.be/Jpq8W5mcRIM
+
+Full FastJava ecosystem:
+https://github.com/andrestubbe
+
+#FastJava #FastKeyboard #FastMouse #RawInput #Win32 #JavaPerformance #JNI #GameDev #LowLatency #ZeroGC

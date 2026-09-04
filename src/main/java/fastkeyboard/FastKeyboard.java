@@ -25,10 +25,6 @@ public interface FastKeyboard extends AutoCloseable {
         return new FastKeyboardImpl(targetWindowHandle);
     }
 
-    // ═══════════════════════════════════════════════════════════
-    // Events & Lifecycle
-    // ═══════════════════════════════════════════════════════════
-
     /**
      * Starts listening for keyboard events in a dedicated native thread.
      * 
@@ -45,10 +41,6 @@ public interface FastKeyboard extends AutoCloseable {
     default void close() {
         stopListening();
     }
-
-    // ═══════════════════════════════════════════════════════════
-    // Normal Methods (Binding & Devices)
-    // ═══════════════════════════════════════════════════════════
 
     /**
      * Binds input capture to a specific Win32 window handle.
@@ -73,10 +65,6 @@ public interface FastKeyboard extends AutoCloseable {
      */
     List<KeyboardDevice> getConnectedDevices();
 
-    // ═══════════════════════════════════════════════════════════
-    // Is / Has
-    // ═══════════════════════════════════════════════════════════
-
     /**
      * Checks if the native listener is currently active.
      */
@@ -86,10 +74,6 @@ public interface FastKeyboard extends AutoCloseable {
      * Returns whether keystroke capture is currently restricted to a specific window.
      */
     boolean isWindowBound();
-
-    // ═══════════════════════════════════════════════════════════
-    // Getter
-    // ═══════════════════════════════════════════════════════════
 
     /**
      * Returns the currently bound window handle (HWND), or 0 if listening globally.

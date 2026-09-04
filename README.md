@@ -12,7 +12,9 @@
 
 **FastKeyboard** provides hardware-level keystroke interception, immutable physical make codes, multi-keyboard hardware identification, and native window-focus gating (`HWND`). Built for game engines, high-speed terminal emulators, low-latency UI frameworks, and telemetry tools with zero JVM Garbage Collection overhead.
 
-[![FastKeyboard Showcase](docs/screenshot.png)](https://github.com/andrestubbe/FastKeyboard)
+[![FastKeyboard Showcase](docs/screenshot.png)](https://youtu.be/Jpq8W5mcRIM)
+
+[**Watch Showcase Demo (YouTube)**](https://youtu.be/Jpq8W5mcRIM)
 
 ---
 
@@ -50,9 +52,9 @@ public class Demo {
 - [Quick Start](#quick-start)
 - [Key Features](#key-features)
 - [Real-World Use Cases](#real-world-use-cases)
-- [Window Binding & Focus Gating](#window-binding--focus-gating)
 - [Performance Benchmarks](#performance-benchmarks)
 - [API Quick Reference](#api-quick-reference)
+- [Window Binding & Focus Gating](#window-binding--focus-gating)
 - [Technical Examples & Hero Demos](#technical-examples--hero-demos)
 - [Installation](#installation)
 - [Documentation](#documentation)
@@ -101,25 +103,6 @@ Standard Java keyboard handling (like AWT `KeyListener`, JavaFX, or polling `Get
 
 ---
 
-## Window Binding & Focus Gating
-
-FastKeyboard supports seamless switching between **Global Interception** (for bots, hotkeys, screen recorders) and **Window-Bound Capture** (for UI, games, FastVulkan, FastTerminal):
-
-```java
-FastKeyboard keyboard = FastKeyboard.open();
-
-// 1. Capture system-wide (Global Hook mode)
-keyboard.unbindFromWindow();
-
-// 2. Capture ONLY when target window has foreground focus (UI mode)
-keyboard.bindToWindow(window.getHWND());
-```
-
-> [!NOTE]
-> Window focus verification happens directly in the native C++ message loop via `GetForegroundWindow()`. When the window is inactive, events are discarded immediately with **0 JNI traversals** and **0 JVM allocations**.
-
----
-
 ## Performance Benchmarks
 
 FastKeyboard is rigorously profiled using **JMH** to guarantee zero overhead.
@@ -147,6 +130,25 @@ FastKeyboard is rigorously profiled using **JMH** to guarantee zero overhead.
 | `boolean isListening()` | Returns `true` if the native message loop is active. |
 | `boolean isWindowBound()` | Returns `true` if capture is bound to a specific window. |
 | `long getBoundWindow()` | Returns the bound `HWND` (or `0`). |
+
+---
+
+## Window Binding & Focus Gating
+
+FastKeyboard supports seamless switching between **Global Interception** (for bots, hotkeys, screen recorders) and **Window-Bound Capture** (for UI, games, FastVulkan, FastTerminal):
+
+```java
+FastKeyboard keyboard = FastKeyboard.open();
+
+// 1. Capture system-wide (Global Hook mode)
+keyboard.unbindFromWindow();
+
+// 2. Capture ONLY when target window has foreground focus (UI mode)
+keyboard.bindToWindow(window.getHWND());
+```
+
+> [!NOTE]
+> Window focus verification happens directly in the native C++ message loop via `GetForegroundWindow()`. When the window is inactive, events are discarded immediately with **0 JNI traversals** and **0 JVM allocations**.
 
 ---
 
