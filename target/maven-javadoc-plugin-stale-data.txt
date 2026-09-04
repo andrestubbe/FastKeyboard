@@ -19,32 +19,32 @@
 -docencoding
 'UTF-8'
 -doctitle
-'FastKeyboard 0.1.1 API'
+'FastKeyboard 0.1.2 API'
 -use
 -version
 -windowtitle
-'FastKeyboard 0.1.1 API'
+'FastKeyboard 0.1.2 API'
 fastkeyboard
 C:\Users\andre\.m2\repository\com\github\andrestubbe\FastCore\0.1.0\FastCore-0.1.0.jar = 1788259924094
 C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastKeyboard\src\main\java = 1787413617236
-C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastKeyboard\target\generated-sources\annotations = 1788512394797
-C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastKeyboard\target\apidocs\allclasses-index.html = 1788512399469
-C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastKeyboard\target\apidocs\allpackages-index.html = 1788512399471
-C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastKeyboard\target\apidocs\constant-values.html = 1788512399409
-C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastKeyboard\target\apidocs\copy.svg = 1788512399540
-C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastKeyboard\target\apidocs\element-list = 1788512399377
-C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastKeyboard\target\apidocs\help-doc.html = 1788512399530
-C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastKeyboard\target\apidocs\index-all.html = 1788512399518
-C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastKeyboard\target\apidocs\index.html = 1788512399525
-C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastKeyboard\target\apidocs\link.svg = 1788512399542
-C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastKeyboard\target\apidocs\member-search-index.js = 1788512399477
-C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastKeyboard\target\apidocs\module-search-index.js = 1788512399473
-C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastKeyboard\target\apidocs\overview-tree.html = 1788512399443
-C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastKeyboard\target\apidocs\package-search-index.js = 1788512399475
-C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastKeyboard\target\apidocs\script.js = 1788512399537
-C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastKeyboard\target\apidocs\search-page.js = 1788512399548
-C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastKeyboard\target\apidocs\search.html = 1788512399522
-C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastKeyboard\target\apidocs\search.js = 1788512399545
-C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastKeyboard\target\apidocs\stylesheet.css = 1788512399535
-C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastKeyboard\target\apidocs\tag-search-index.js = 1788512399479
-C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastKeyboard\target\apidocs\type-search-index.js = 1788512399476
+C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastKeyboard\target\generated-sources\annotations = 1788512712083
+C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastKeyboard\target\apidocs\allclasses-index.html = 1788512716718
+C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastKeyboard\target\apidocs\allpackages-index.html = 1788512716721
+C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastKeyboard\target\apidocs\constant-values.html = 1788512716653
+C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastKeyboard\target\apidocs\copy.svg = 1788512716796
+C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastKeyboard\target\apidocs\element-list = 1788512716617
+C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastKeyboard\target\apidocs\help-doc.html = 1788512716789
+C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastKeyboard\target\apidocs\index-all.html = 1788512716779
+C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastKeyboard\target\apidocs\index.html = 1788512716785
+C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastKeyboard\target\apidocs\link.svg = 1788512716799
+C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastKeyboard\target\apidocs\member-search-index.js = 1788512716726
+C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastKeyboard\target\apidocs\module-search-index.js = 1788512716723
+C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastKeyboard\target\apidocs\overview-tree.html = 1788512716696
+C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastKeyboard\target\apidocs\package-search-index.js = 1788512716724
+C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastKeyboard\target\apidocs\script.js = 1788512716794
+C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastKeyboard\target\apidocs\search-page.js = 1788512716803
+C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastKeyboard\target\apidocs\search.html = 1788512716782
+C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastKeyboard\target\apidocs\search.js = 1788512716802
+C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastKeyboard\target\apidocs\stylesheet.css = 1788512716792
+C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastKeyboard\target\apidocs\tag-search-index.js = 1788512716727
+C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastKeyboard\target\apidocs\type-search-index.js = 1788512716725
