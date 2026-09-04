@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.2] - 2026-09-04
+
+### Fixed
+- **Native JNI Signature Parameter Alignment**: Resolved critical signature mismatch in `nStart` between Java (`(J)J`) and native C++ layer (`Java_fastkeyboard_FastKeyboardImpl_nStart`). Previously, a redundant Java parameter passed a Java object reference in place of the native window handle, causing focus gating to fail and keystrokes to be dropped.
+- **Enhanced Window Focus Gating**: Added process ID verification (`GetWindowThreadProcessId`) in `IsWindowFocused` ensuring child, popup, or sibling windows belonging to the target process maintain active keyboard interception.
+- **Clean Message Loop Shutdown**: Handled `WM_CLOSE` and `WM_DESTROY` natively, properly releasing hidden RawInput receiver windows upon `stopListening()` / `close()`.
+- **Standalone Fat Release JAR**: Release asset now bundles both class files and the compiled native `fastkeyboard.dll`.
+
 ## [0.1.1] - 2026-08-19
 
 ### Added
