@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"fastkeyboard","l":"FastKeyboard"},{"p":"fastkeyboard","l":"FastKeyboardImpl"},{"p":"fastkeyboard","l":"FastKeyboardListener"},{"p":"fastkeyboard","l":"KeyboardDevice"},{"p":"fastkeyboard","l":"Keys"}];updateSearchResults();

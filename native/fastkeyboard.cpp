@@ -41,6 +41,12 @@ static inline bool IsWindowFocused(HWND targetHwnd) {
     if (GetAncestor(fgWindow, GA_ROOT) == targetHwnd) return true;
     if (GetAncestor(fgWindow, GA_ROOT) == GetAncestor(targetHwnd, GA_ROOT)) return true;
 
+    // Process ID check: if foreground window belongs to the same process, allow it
+    DWORD targetPid = 0, fgPid = 0;
+    GetWindowThreadProcessId(targetHwnd, &targetPid);
+    GetWindowThreadProcessId(fgWindow, &fgPid);
+    if (targetPid != 0 && targetPid == fgPid) return true;
+
     // Walk parent hierarchy to handle embedded hosts
     HWND parent = targetHwnd;
     while ((parent = GetParent(parent)) != NULL) {
@@ -56,14 +62,23 @@ static inline bool IsWindowFocused(HWND targetHwnd) {
 
 // Window Procedure to handle Raw Input
 LRESULT CALLBACK RawInputWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+    if (msg == WM_CLOSE) {
+        DestroyWindow(hwnd);
+        return 0;
+    }
+    if (msg == WM_DESTROY) {
+        PostQuitMessage(0);
+        return 0;
+    }
     if (msg == WM_INPUT) {
         // Fast Window-Focus Gating: If target window is specified, only process when active!
         if (g_ctx && g_ctx->targetHwnd != NULL && !IsWindowFocused(g_ctx->targetHwnd)) {
             return 0; // Target window does NOT have focus -> Zero CPU overhead, skip!
         }
 
-        UINT dwSize;
+        UINT dwSize = 0;
         GetRawInputData((HRAWINPUT)lParam, RID_INPUT, NULL, &dwSize, sizeof(RAWINPUTHEADER));
+        if (dwSize == 0) return 0;
         
         std::vector<BYTE> lpb(dwSize);
         if (GetRawInputData((HRAWINPUT)lParam, RID_INPUT, lpb.data(), &dwSize, sizeof(RAWINPUTHEADER)) != dwSize) {
@@ -107,6 +122,7 @@ LRESULT CALLBACK RawInputWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPar
                 if (jKeyChar) env->DeleteLocalRef(jKeyChar);
             }
         }
+        return 0;
     }
     return DefWindowProc(hwnd, msg, wParam, lParam);
 }
@@ -137,6 +153,15 @@ void MessageLoop(KeyboardThreadContext* ctx) {
     while (ctx->running && GetMessage(&msg, NULL, 0, 0)) {
         TranslateMessage(&msg);
         DispatchMessage(&msg);
+    }
+
+    rid.dwFlags = RIDEV_REMOVE;
+    rid.hwndTarget = NULL;
+    RegisterRawInputDevices(&rid, 1, sizeof(rid));
+
+    if (ctx->hwnd) {
+        DestroyWindow(ctx->hwnd);
+        ctx->hwnd = NULL;
     }
 }
 
