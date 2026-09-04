@@ -12,9 +12,9 @@
 
 **FastKeyboard** provides hardware-level keystroke interception, immutable physical make codes, multi-keyboard hardware identification, and native window-focus gating (`HWND`). Built for game engines, high-speed terminal emulators, low-latency UI frameworks, and telemetry tools with zero JVM Garbage Collection overhead.
 
-[![FastKeyboard Showcase](docs/screenshot.png)](https://youtu.be/Jpq8W5mcRIM)
-
 [**Watch Showcase Demo (YouTube)**](https://youtu.be/Jpq8W5mcRIM)
+
+[![FastKeyboard Showcase](docs/screenshot.png)](https://youtu.be/Jpq8W5mcRIM)
 
 ---
 
