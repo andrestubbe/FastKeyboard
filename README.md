@@ -39,6 +39,8 @@ public class Demo {
 
             // Keep main thread alive
             Thread.sleep(Long.MAX_VALUE);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
@@ -48,19 +50,19 @@ public class Demo {
 
 ## Table of Contents
 
-- [Why FastKeyboard?](#why-fastkeyboard)
 - [Quick Start](#quick-start)
+- [Why FastKeyboard?](#why-fastkeyboard)
 - [Key Features](#key-features)
 - [Real-World Use Cases](#real-world-use-cases)
 - [Performance Benchmarks](#performance-benchmarks)
 - [API Quick Reference](#api-quick-reference)
 - [Window Binding & Focus Gating](#window-binding--focus-gating)
-- [Technical Examples & Hero Demos](#technical-examples--hero-demos)
+- [Technical Demos & Benchmarks](#technical-demos--benchmarks)
 - [Installation](#installation)
 - [Documentation](#documentation)
 - [Platform Support](#platform-support)
-- [License](#license)
 - [Related Projects](#related-projects)
+- [License](#license)
 
 ---
 
@@ -105,7 +107,7 @@ Standard Java keyboard handling (like AWT `KeyListener`, JavaFX, or polling `Get
 
 ## Performance Benchmarks
 
-FastKeyboard is rigorously profiled using **JMH** to guarantee zero overhead.
+FastKeyboard is profiled using **JMH (Java Microbenchmark Harness)** to guarantee zero overhead.
 
 | Benchmark / Operation | Score (ops/ms) | Ops per Second |
 |---|---|---|
@@ -118,18 +120,20 @@ FastKeyboard is rigorously profiled using **JMH** to guarantee zero overhead.
 
 ## API Quick Reference
 
-| Method | Description |
-|---|---|
-| `static FastKeyboard open()` | Factory method to create a new global implementation instance. |
-| `static FastKeyboard openForWindow(long hwnd)` | Factory method bound to a specific Win32 window handle (`HWND`). |
-| `void startListening(FastKeyboardListener listener)` | Begins background raw input capture. |
-| `void stopListening()` | Stops the background listener thread and cleans up native resources. |
-| `void bindToWindow(long hwnd)` | Focus-gates capture to the specified window handle. |
-| `void unbindFromWindow()` | Restores global capture across all desktop windows. |
-| `List<KeyboardDevice> getConnectedDevices()` | Lists all attached HID keyboard hardware devices. |
-| `boolean isListening()` | Returns `true` if the native message loop is active. |
-| `boolean isWindowBound()` | Returns `true` if capture is bound to a specific window. |
-| `long getBoundWindow()` | Returns the bound `HWND` (or `0`). |
+| Method | Return Type | Description | Docs |
+|---|---|---|---|
+| `FastKeyboard.open()` | `FastKeyboard` | Factory method to create a new global capture listener. | [Reference](docs/REFERENCE.md#factory-methods) |
+| `FastKeyboard.openForWindow(hwnd)` | `FastKeyboard` | Factory method bound to a specific Win32 window handle (`HWND`). | [Reference](docs/REFERENCE.md#factory-methods) |
+| `FastKeyboard.getConsoleWindow()` | `long` | Retrieves native console window handle (`HWND`) if running in a console. | [Reference](docs/REFERENCE.md#factory-methods) |
+| `startListening(listener)` | `void` | Begins background raw input capture in a dedicated native thread. | [Reference](docs/REFERENCE.md#event-capture--window-binding) |
+| `stopListening()` | `void` | Stops the background listener thread and cleans up native resources. | [Reference](docs/REFERENCE.md#event-capture--window-binding) |
+| `bindToWindow(hwnd)` | `void` | Focus-gates capture to the specified window handle (`0` = global). | [Reference](docs/REFERENCE.md#event-capture--window-binding) |
+| `unbindFromWindow()` | `void` | Restores global capture across all desktop windows. | [Reference](docs/REFERENCE.md#event-capture--window-binding) |
+| `getConnectedDevices()` | `List<KeyboardDevice>` | Lists all attached HID keyboard hardware devices. | [Reference](docs/REFERENCE.md#device-querying) |
+| `isListening()` | `boolean` | Returns `true` if the native message loop is currently active. | [Reference](docs/REFERENCE.md#event-capture--window-binding) |
+| `isWindowBound()` | `boolean` | Returns `true` if capture is bound to a specific window. | [Reference](docs/REFERENCE.md#event-capture--window-binding) |
+| `getBoundWindow()` | `long` | Returns the bound `HWND` (or `0` if global). | [Reference](docs/REFERENCE.md#event-capture--window-binding) |
+| `close()` | `void` | Releases native hooks and frees unmanaged resources. | [Reference](docs/REFERENCE.md#event-capture--window-binding) |
 
 ---
 
@@ -152,12 +156,12 @@ keyboard.bindToWindow(window.getHWND());
 
 ---
 
-## Technical Examples & Hero Demos
+## Technical Demos & Benchmarks
 
 | Case | Java Example | Launcher | Description |
 |---|---|---|---|
 | **Interactive Terminal Demo** | [Demo.java](examples/Demo/src/main/java/fastkeyboard/Demo.java) | `run-demo.bat` | Live keystroke monitor styled with FastANSI gray & bright-white theme. Supports toggling between Global and Window-Bound focus via `[B]`. |
-| **Throughput Benchmark** | [Benchmark.java](examples/Benchmark/src/main/java/fastkeyboard/benchmark/Benchmark.java) | `run-benchmark.bat` | JMH benchmark suite measuring raw event dispatch throughput and hardware enumeration speed. |
+| **JMH Microbenchmark Suite** | [Benchmark.java](examples/Benchmark/src/main/java/fastkeyboard/benchmark/Benchmark.java) | `run-benchmark.bat` | JMH benchmark suite measuring raw event dispatch throughput and hardware enumeration speed. |
 
 ---
 
@@ -176,6 +180,7 @@ Add the JitPack repository and the dependency to your `pom.xml`:
 </repositories>
 
 <dependencies>
+    <!-- FastKeyboard Library -->
     <dependency>
         <groupId>com.github.andrestubbe</groupId>
         <artifactId>FastKeyboard</artifactId>
@@ -217,11 +222,11 @@ Download the latest JARs directly to add them to your classpath:
 
 ## Documentation
 
-* **[COMPILE.md](docs/COMPILE.md)**: Full compilation guide (MSVC C++17 build chain + JNI Setup).
-* **[REFERENCE.md](docs/REFERENCE.md)**: Exhaustive catalog of API descriptions, focus gating, and scancodes.
-* **[PHILOSOPHY.md](docs/PHILOSOPHY.md)**: Zero-allocation and low-overhead processing designs.
-* **[ROADMAP.md](docs/ROADMAP.md)**: Planned milestone features and performance extensions.
-* **[CHANGELOG.md](docs/CHANGELOG.md)**: Complete version history and release notes.
+- **[COMPILE.md](docs/COMPILE.md)**: Full compilation guide (MSVC C++17 build chain + JNI Setup).
+- **[REFERENCE.md](docs/REFERENCE.md)**: Exhaustive catalog of API descriptions, focus gating, and scancodes.
+- **[PHILOSOPHY.md](docs/PHILOSOPHY.md)**: Zero-allocation and low-overhead processing designs.
+- **[ROADMAP.md](docs/ROADMAP.md)**: Planned milestone features and performance extensions.
+- **[CHANGELOG.md](docs/CHANGELOG.md)**: Complete version history and release notes.
 
 ---
 
@@ -234,27 +239,26 @@ Download the latest JARs directly to add them to your classpath:
 
 ---
 
+## Related Projects
+
+- **[`FastCore`](https://github.com/andrestubbe/FastCore)** — Native Library Loader & JNI Utilities for Java
+- **[`FastHotkey`](https://github.com/andrestubbe/FastHotkey)** — Low-Latency Global Hotkey API for Java
+- **[`FastKeylogger`](https://github.com/andrestubbe/FastKeylogger)** — Behavioral Typing & Telemetry Logic for Java
+- **[`FastMouse`](https://github.com/andrestubbe/FastMouse)** — Ultra-Low Latency Native RawInput Mouse Engine
+- **[`FastMouseLogger`](https://github.com/andrestubbe/FastMouseLogger)** — Mouse Telemetry & Behavioral Analytics
+- **[`FastTouch`](https://github.com/andrestubbe/FastTouch)** — Native Multi-Touch Digitizer API for Java
+- **[`FastStylus`](https://github.com/andrestubbe/FastStylus)** — Native Pen & Stylus Pressure API for Java
+- **[`FastVulkan`](https://github.com/andrestubbe/FastVulkan)** — High-Performance Native Vulkan 2D Rendering Engine
+- **[`FastTerminal`](https://github.com/andrestubbe/FastTerminal)** — Native High-Speed Terminal & TUI Engine
+- **[`FastAnimation`](https://github.com/andrestubbe/FastAnimation)** — Ultra-Fast Native Animation & Timeline Engine
+- **[`FastSIMD`](https://github.com/andrestubbe/FastSIMD)** — AVX2/AVX-512 Vectorized Operations for Java
+
+---
+
 ## License
 
 MIT License — See [LICENSE](LICENSE) file for details.
 
 ---
 
-## Related Projects
-
-- [FastCore](https://github.com/andrestubbe/FastCore) — Native Library Loader & JNI Utilities for Java
-- [FastHotkey](https://github.com/andrestubbe/FastHotkey) — Low-Latency Global Hotkey API for Java
-- [FastKeyboard](https://github.com/andrestubbe/FastKeyboard) — Ultra-Fast Native RawInput Keyboard Engine
-- [FastKeylogger](https://github.com/andrestubbe/FastKeylogger) — Behavioral Typing & Telemetry Logic for Java
-- [FastMouse](https://github.com/andrestubbe/FastMouse) — Ultra-Low Latency Native RawInput Mouse Engine
-- [FastMouseLogger](https://github.com/andrestubbe/FastMouseLogger) — Mouse Telemetry & Behavioral Analytics
-- [FastTouch](https://github.com/andrestubbe/FastTouch) — Native Multi-Touch Digitizer API for Java
-- [FastStylus](https://github.com/andrestubbe/FastStylus) — Native Pen & Stylus Pressure API for Java
-- [FastVulkan](https://github.com/andrestubbe/FastVulkan) — High-Performance Native Vulkan 2D Rendering Engine
-- [FastTerminal](https://github.com/andrestubbe/FastTerminal) — Native High-Speed Terminal & TUI Engine
-- [FastAnimation](https://github.com/andrestubbe/FastAnimation) — Ultra-Fast Native Animation & Timeline Engine
-- [FastSIMD](https://github.com/andrestubbe/FastSIMD) — AVX2/AVX-512 Vectorized Operations for Java
-
----
-
-**Part of the FastJava Ecosystem** — *Making the JVM faster. Small package. Maximum speed. Zero bloat. 🚀📋*
+**Part of the FastJava Ecosystem** — *Making the JVM faster.* 🚀

@@ -1,29 +1,29 @@
-# The Philosophy of FastXXX
+# The Philosophy of FastKeyboard
 
 > [!IMPORTANT]
 > **"Keine Kopien. Niemals. Kritischer JNI-Pfad. Native-First Performance."**
 
-FastXXX is built on the principle that modern Java applications require **native-first** acceleration for performance-critical operations that the standard JVM APIs don't fully optimize.
+FastKeyboard is built on the principle that modern Java applications require **native-first** acceleration for performance-critical operations that the standard JVM APIs don't fully optimize.
 
 ## Core Tenets
 
 1.  **Native-First Execution**
-    Bypass standard Java layers to reach the physical limits of the hardware using hand-tuned C++ and SIMD intrinsics.
+    Bypass standard Java AWT/Swing input layers to reach the physical limits of the hardware using direct Win32 RawInput (`WM_INPUT`) message handling.
 
 2.  **Zero-Copy JNI Architecture**
-    Minimize JNI transition costs by using direct memory access patterns and avoiding implicit memory copies between the JVM and the native layer.
+    Minimize JNI transition costs by caching method IDs and passing raw primitive arguments directly between the Win32 message loop and Java listeners without intermediate heap object allocations.
 
 3.  **Deterministic Latency**
-    Eliminate variance caused by JIT warm-up or garbage collection stalls in critical hot-paths.
+    Eliminate input variance caused by JIT warm-up, AWT Event Dispatch Thread stalls, or garbage collection pauses in latency-critical gaming and telemetry loops.
 
 4.  **Hardware-Aware Optimization**
-    Leverage modern CPU features (AVX, SSE, NEON) to process data at hardware-native speeds.
+    Capture uncompressed physical hardware make codes directly from the keyboard controller before Windows OS keyboard layout translation or key repeat throttling.
 
 5.  **Blueprint Consistency**
-    As part of the **FastJava** ecosystem, FastXXX adheres to a standardized architecture:
-    *   **Native Backend**: Direct C++ implementation.
+    As part of the **FastJava** ecosystem, FastKeyboard adheres to a standardized architecture:
+    *   **Native Backend**: Direct Win32 C++ implementation with native HWND focus gating.
     *   **Unified Loading**: Powered by `FastCore`.
     *   **Premium Quality**: Built for high-performance systems and autonomous agents.
 
 ---
-**⚡ FastXXX — Powering the next generation of Native Java.**
+**⚡ FastKeyboard — Powering the next generation of Native Java.**
