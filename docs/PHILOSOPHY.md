@@ -1,7 +1,7 @@
 # The Philosophy of FastKeyboard
 
 > [!IMPORTANT]
-> **"Keine Kopien. Niemals. Kritischer JNI-Pfad. Native-First Performance."**
+> **"Zero Copies. Never. Critical JNI Path. Native-First Performance."**
 
 FastKeyboard is built on the principle that modern Java applications require **native-first** acceleration for performance-critical operations that the standard JVM APIs don't fully optimize.
 
