@@ -82,6 +82,13 @@ Standard Java keyboard handling (like AWT `KeyListener`, JavaFX, or polling `Get
 - **Zero CPU Overhead**: Purely event-driven native message loop with JNI method caching.
 - **Native Window Focus Gating**: Natively filters keystrokes by `HWND` in C++ — zero context switches or Java events when the window is in the background.
 
+| Feature | Java AWT KeyListener | JNativeHook | FastKeyboard |
+|:---|:---|:---|:---|
+| **Input Pipeline** | OS translated virtual keys | Global `WH_KEYBOARD_LL` hook | **Win32 RawInput (`WM_INPUT`)** |
+| **Physical Scancodes** | Layout-dependent char mapping | Virtual key codes | **Immutable hardware make codes** |
+| **Multi-Device Support**| Single aggregated keyboard stream| Aggregated stream only | **Individual `hDevice` hardware IDs** |
+| **Focus Gating** | Active window only | Intercepts all OS keys | **Native Win32 `HWND` focus filter** |
+
 ---
 
 ## Key Features
