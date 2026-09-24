@@ -1,3 +1,5 @@
+[Index](https://github.com/andrestubbe) · [Previous](https://github.com/andrestubbe/FastHotkey) | [Next](https://github.com/andrestubbe/FastKeylogger)
+
 # FastKeyboard 0.1.2 [2026-09-04] — Ultra-Fast Native RawInput Keyboard Engine for Java
 
 [![Status](https://img.shields.io/badge/status-0.1.2-brightgreen.svg)](https://github.com/andrestubbe/FastKeyboard/releases/tag/0.1.2)
@@ -249,17 +251,14 @@ Download the latest JARs directly to add them to your classpath:
 
 ## Related Projects
 
-- **[`FastCore`](https://github.com/andrestubbe/FastCore)** — Native Library Loader & JNI Utilities for Java
-- **[`FastHotkey`](https://github.com/andrestubbe/FastHotkey)** — Low-Latency Global Hotkey API for Java
-- **[`FastKeylogger`](https://github.com/andrestubbe/FastKeylogger)** — Behavioral Typing & Telemetry Logic for Java
-- **[`FastMouse`](https://github.com/andrestubbe/FastMouse)** — Ultra-Low Latency Native RawInput Mouse Engine
-- **[`FastMouseLogger`](https://github.com/andrestubbe/FastMouseLogger)** — Mouse Telemetry & Behavioral Analytics
-- **[`FastTouch`](https://github.com/andrestubbe/FastTouch)** — Native Multi-Touch Digitizer API for Java
-- **[`FastStylus`](https://github.com/andrestubbe/FastStylus)** — Native Pen & Stylus Pressure API for Java
-- **[`FastVulkan`](https://github.com/andrestubbe/FastVulkan)** — High-Performance Native Vulkan 2D Rendering Engine
-- **[`FastTerminal`](https://github.com/andrestubbe/FastTerminal)** — Native High-Speed Terminal & TUI Engine
-- **[`FastAnimation`](https://github.com/andrestubbe/FastAnimation)** — Ultra-Fast Native Animation & Timeline Engine
-- **[`FastSIMD`](https://github.com/andrestubbe/FastSIMD)** — AVX2/AVX-512 Vectorized Operations for Java
+- **[`FastCore`](https://github.com/andrestubbe/FastCore)** — Native library loader and ecosystem runtime substrate for Java
+- **[`FastHotkey`](https://github.com/andrestubbe/FastHotkey)** — Low-latency global hotkey engine for Java
+- **[`FastKeylogger`](https://github.com/andrestubbe/FastKeylogger)** — Low-latency keyboard event capture and logging
+- **[`FastMouse`](https://github.com/andrestubbe/FastMouse)** — Ultra-low latency native raw input mouse engine for Java
+- **[`FastMouseLogger`](https://github.com/andrestubbe/FastMouseLogger)** — High-frequency mouse telemetry and event logging
+- **[`FastTouch`](https://github.com/andrestubbe/FastTouch)** — Multi-touch and pointer input capture for Java
+- **[`FastStylus`](https://github.com/andrestubbe/FastStylus)** — Pen and stylus input tracking for Java
+- **[`FastGamepad`](https://github.com/andrestubbe/FastGamepad)** — Gamepad input handling for Java
 
 ---
 
